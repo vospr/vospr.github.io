@@ -5,7 +5,9 @@ hook: "Forecasting isn't just fitting ARIMA and calling it done — it's picking
 status: "published"
 order: 3
 stack: ["Python", "Pandas", "NumPy", "TensorFlow/Keras", "R", "STATA", "ARIMA", "scikit-learn"]
-links: []
+links:
+  - label: "GitHub"
+    url: "https://github.com/vospr/time-series-forecasting"
 ---
 
 ## Problem
@@ -21,5 +23,3 @@ Economics research at Université de Neuchâtel needed both rigorous classical t
 ## Outcome
 
 Forecasting models and statistical analysis used directly in academic research output, spanning both classical (ARIMA/STATA) and deep-learning (TensorFlow/Keras) approaches.
-
-<!-- TODO: link once pushed to GitHub -->
