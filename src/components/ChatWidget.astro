@@ -41,7 +41,7 @@ const WORKER_URL = 'https://andrey-portfolio-chat.vospr2.workers.dev/chat';
   const panel = document.getElementById('chat-panel');
   const closeBtn = document.getElementById('chat-close');
   const log = document.getElementById('chat-log');
-  const emptyState = document.getElementById('chat-empty');
+  let emptyState = document.getElementById('chat-empty');
   const form = document.getElementById('chat-form');
   const input = document.getElementById('chat-input');
   const sendBtn = document.getElementById('chat-send');
@@ -54,9 +54,26 @@ const WORKER_URL = 'https://andrey-portfolio-chat.vospr2.workers.dev/chat';
     launcher.hidden = true;
     input.focus();
   }
+  function resetConversation() {
+    history = [];
+    lastUserMessage = null;
+    input.value = '';
+    sendBtn.disabled = true;
+    log.innerHTML = '';
+    const el = document.createElement('div');
+    el.id = 'chat-empty';
+    el.className = 'cw-empty';
+    el.innerHTML =
+      "<p>Hi, I can answer questions about Andrey's projects, stack and background.</p>" +
+      '<p>Answers are AI-generated. Check the project pages for detail.</p>';
+    log.appendChild(el);
+    emptyState = el;
+  }
+
   function close() {
     panel.hidden = true;
     launcher.hidden = false;
+    resetConversation();
   }
   launcher.addEventListener('click', open);
   closeBtn.addEventListener('click', close);
@@ -361,16 +378,36 @@ const WORKER_URL = 'https://andrey-portfolio-chat.vospr2.workers.dev/chat';
   }
   .cw-send {
     height: 44px;
-    padding: 0 16px;
+    padding: 0 18px;
     border: none;
-    border-radius: 6px;
-    background: var(--btn-primary-bg);
-    color: var(--btn-primary-fg);
-    font: 500 14px var(--font-body);
+    border-radius: 8px;
+    background: var(--accent);
+    color: #fff;
+    font: 600 14px var(--font-body);
     cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--accent) 35%, transparent);
+    transition: background 120ms ease, transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
   }
-  .cw-send:hover { background: var(--btn-primary-hover); }
-  .cw-send:disabled { background: var(--border); color: #8a8d92; cursor: default; }
+  .cw-send::after {
+    content: '→';
+    font-size: 15px;
+  }
+  .cw-send:hover:not(:disabled) {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px color-mix(in srgb, var(--accent) 45%, transparent);
+  }
+  .cw-send:active:not(:disabled) { transform: translateY(0); }
+  .cw-send:disabled {
+    color: #fff;
+    opacity: 0.35;
+    cursor: default;
+    box-shadow: none;
+    transform: none;
+  }
 
   @media (max-width: 480px) {
     .cw-panel {
