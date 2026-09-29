@@ -4,6 +4,12 @@ interface Props {
   description?: string;
 }
 const { title, description = 'Andrey Popov — AI Solutions Engineer' } = Astro.props;
+
+const variantNames: Record<string, string> = {
+  a: 'A — Technical Minimal',
+  b: 'B — Warm Editorial',
+  c: 'C — Data-Dense',
+};
 ---
 <!doctype html>
 <html lang="en">
@@ -12,8 +18,51 @@ const { title, description = 'Andrey Popov — AI Solutions Engineer' } = Astro.
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <title>{title} · Andrey Popov</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <script is:inline>
+      // Client-side so ?variant= works on statically prerendered pages too.
+      (function () {
+        var valid = ['a', 'b', 'c'];
+        var params = new URLSearchParams(location.search);
+        var v = params.get('variant');
+        if (valid.indexOf(v) === -1) {
+          v = localStorage.getItem('design-variant') || 'a';
+        } else {
+          localStorage.setItem('design-variant', v);
+        }
+        document.documentElement.setAttribute('data-variant', v);
+      })();
+    </script>
   </head>
   <body>
+    <div class="variant-picker">
+      <span>Design preview — pick one:</span>
+      <a href="#" data-v="a">A — Technical Minimal</a>
+      <a href="#" data-v="b">B — Warm Editorial</a>
+      <a href="#" data-v="c">C — Data-Dense</a>
+    </div>
+    <script is:inline>
+      (function () {
+        var current = document.documentElement.getAttribute('data-variant');
+        document.querySelectorAll('.variant-picker a').forEach(function (a) {
+          var v = a.getAttribute('data-v');
+          if (v === current) a.classList.add('active');
+          a.addEventListener('click', function (e) {
+            e.preventDefault();
+            localStorage.setItem('design-variant', v);
+            document.documentElement.setAttribute('data-variant', v);
+            document.querySelectorAll('.variant-picker a').forEach(function (x) {
+              x.classList.toggle('active', x === a);
+            });
+          });
+        });
+      })();
+    </script>
     <header class="site-header">
       <a class="brand" href="/">Andrey Popov</a>
       <nav>
@@ -32,34 +81,41 @@ const { title, description = 'Andrey Popov — AI Solutions Engineer' } = Astro.
 </html>
 
 <style is:global>
+  /* ===== Base structure (shared across all variants) ===== */
   :root {
     color-scheme: light dark;
-    --fg: #1a1a1a;
-    --bg: #ffffff;
-    --muted: #666;
-    --accent: #2563eb;
-    --border: #e5e5e5;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --fg: #e8e8e8;
-      --bg: #121212;
-      --muted: #999;
-      --border: #2a2a2a;
-    }
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
     color: var(--fg);
     background: var(--bg);
-    line-height: 1.55;
+    line-height: var(--line-height, 1.55);
+    font-family: var(--font-body);
   }
   main {
-    max-width: 780px;
+    max-width: var(--measure, 780px);
     margin: 0 auto;
     padding: 2rem 1.25rem 4rem;
+  }
+  .variant-picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 0.6rem 1.25rem;
+    background: #fffbe6;
+    color: #444;
+    font-size: 0.8rem;
+    border-bottom: 1px solid #e5d98a;
+  }
+  .variant-picker a {
+    color: #444;
+    text-decoration: underline;
+  }
+  .variant-picker a.active {
+    font-weight: 700;
+    color: #111;
   }
   .site-header {
     display: flex;
@@ -75,6 +131,7 @@ const { title, description = 'Andrey Popov — AI Solutions Engineer' } = Astro.
     color: var(--fg);
     text-decoration: none;
     font-size: 1.05rem;
+    font-family: var(--font-heading);
   }
   .site-header nav {
     display: flex;
@@ -94,30 +151,34 @@ const { title, description = 'Andrey Popov — AI Solutions Engineer' } = Astro.
     font-size: 0.85rem;
     border-top: 1px solid var(--border);
   }
-  h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+  h1, h2, h3 { font-family: var(--font-heading); }
+  h1 { font-size: var(--h1-size, 1.75rem); margin-bottom: 0.25rem; font-weight: var(--h1-weight, 700); }
   h2 { font-size: 1.2rem; margin-top: 2rem; }
   .hook {
-    color: var(--muted);
-    font-style: italic;
+    color: var(--hook-color, var(--muted));
+    font-style: var(--hook-style, italic);
+    font-size: var(--hook-size, 1rem);
     margin-top: 0;
   }
   .card {
     border: 1px solid var(--border);
-    border-radius: 10px;
+    border-radius: var(--radius, 10px);
     padding: 1.1rem 1.25rem;
-    margin-bottom: 1rem;
+    margin-bottom: var(--card-gap, 1rem);
     text-decoration: none;
     color: inherit;
     display: block;
+    background: var(--card-bg, transparent);
   }
   .card:hover { border-color: var(--accent); }
   .card h3 { margin: 0 0 0.35rem; font-size: 1.05rem; }
   .card p { margin: 0; color: var(--muted); font-size: 0.92rem; }
   .badge {
     display: inline-block;
+    font-family: var(--font-mono);
     font-size: 0.72rem;
     padding: 0.15rem 0.5rem;
-    border-radius: 999px;
+    border-radius: var(--badge-radius, 999px);
     border: 1px solid var(--border);
     color: var(--muted);
     margin-left: 0.5rem;
@@ -129,14 +190,61 @@ const { title, description = 'Andrey Popov — AI Solutions Engineer' } = Astro.
     margin: 0.5rem 0 1.5rem;
   }
   .stack span {
+    font-family: var(--font-mono);
     font-size: 0.78rem;
     padding: 0.2rem 0.55rem;
-    border-radius: 6px;
-    background: color-mix(in srgb, var(--accent) 10%, transparent);
-    color: var(--accent);
+    border-radius: var(--badge-radius, 6px);
+    background: var(--stack-bg);
+    color: var(--stack-fg);
   }
   .links a {
     color: var(--accent);
     margin-right: 1rem;
+    font-family: var(--font-mono);
+  }
+
+  /* ===== Variant A — Technical Minimal ===== */
+  :root[data-variant="a"] {
+    --fg: #111214; --bg: #fafaf8; --muted: #666; --accent: #3557e8; --border: #e5e5e5;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-heading: 'Inter', -apple-system, sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+    --measure: 700px; --line-height: 1.6;
+    --stack-bg: color-mix(in srgb, #3557e8 10%, transparent); --stack-fg: #3557e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root[data-variant="a"] { --fg: #ededed; --bg: #0b0c0e; --muted: #999; --border: #2a2a2a; }
+  }
+
+  /* ===== Variant B — Warm Editorial ===== */
+  :root[data-variant="b"] {
+    --fg: #22201c; --bg: #fbf9f5; --muted: #7a7468; --accent: #c1622d; --border: #e8e1d3;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-heading: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+    --measure: 720px; --line-height: 1.65;
+    --h1-size: 2rem; --h1-weight: 600;
+    --hook-color: var(--accent); --hook-style: italic; --hook-size: 1.15rem;
+    --card-bg: color-mix(in srgb, #c1622d 4%, transparent); --radius: 6px;
+    --stack-bg: color-mix(in srgb, #c1622d 12%, transparent); --stack-fg: #a34f22;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root[data-variant="b"] { --fg: #f2eee6; --bg: #1b1917; --muted: #a89f8d; --border: #332f28; --stack-fg: #e0925c; }
+  }
+
+  /* ===== Variant C — Data-Dense / Dashboard ===== */
+  :root[data-variant="c"] {
+    --fg: #0d1117; --bg: #f5f6f7; --muted: #57606a; --accent: #2ea043; --border: #d0d7de;
+    --font-body: 'IBM Plex Sans', -apple-system, sans-serif;
+    --font-heading: 'JetBrains Mono', monospace;
+    --font-mono: 'JetBrains Mono', monospace;
+    --measure: 760px; --line-height: 1.45;
+    --h1-size: 1.5rem; --h1-weight: 600;
+    --hook-style: normal; --hook-size: 0.95rem;
+    --radius: 4px; --badge-radius: 4px; --card-gap: 0.6rem;
+    --stack-bg: color-mix(in srgb, #2ea043 12%, transparent); --stack-fg: #1a7f37;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root[data-variant="c"] { --fg: #e6edf3; --bg: #0d1117; --muted: #8b949e; --border: #30363d; --stack-fg: #3fb950; }
   }
 </style>
