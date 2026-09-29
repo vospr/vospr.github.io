@@ -14,7 +14,7 @@ const WORKER_URL = 'https://andrey-portfolio-chat.vospr2.workers.dev/chat';
         <div class="cw-title">Ask about my work</div>
         <div class="cw-subtitle">Projects · stack · experience</div>
       </div>
-      <button id="chat-close" class="cw-close" aria-label="Close">×</button>
+      <button id="chat-close" class="cw-close" aria-label="Close">−</button>
     </div>
     <div id="chat-log" class="cw-log">
       <div id="chat-empty" class="cw-empty">
@@ -255,11 +255,12 @@ const WORKER_URL = 'https://andrey-portfolio-chat.vospr2.workers.dev/chat';
     border: none;
     border-radius: 6px;
     padding: 11px 16px 11px 14px;
-    font: 500 14px var(--font-body);
+    font: 600 14px var(--font-body);
     box-shadow: 0 4px 14px rgba(21, 23, 26, 0.18);
     cursor: pointer;
+    transition: color 120ms ease;
   }
-  .cw-launcher:hover { background: var(--btn-primary-hover); }
+  .cw-launcher:hover { color: var(--accent); }
   .cw-launcher::before {
     content: '';
     width: 7px;
@@ -302,12 +303,15 @@ const WORKER_URL = 'https://andrey-portfolio-chat.vospr2.workers.dev/chat';
     height: 32px;
     border: 1px solid var(--border);
     background: var(--surface);
-    border-radius: 6px;
+    border-radius: 50%;
     color: var(--muted);
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1;
     cursor: pointer;
     flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
   .cw-close:hover { border-color: var(--accent); color: var(--fg); }
 

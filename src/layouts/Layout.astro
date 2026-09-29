@@ -95,6 +95,20 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site ?? 'https://vospr.github.
   .btn:hover { border-color: var(--accent); color: var(--fg); }
   .btn.primary { background: var(--btn-primary-bg); color: var(--btn-primary-fg); border-color: var(--btn-primary-bg); font-weight: 500; }
   .btn.primary:hover { background: var(--btn-primary-hover); color: var(--btn-primary-fg); }
+  .btn-icon {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius);
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--fg);
+    text-decoration: none;
+    flex: none;
+  }
+  .btn-icon:hover { border-color: var(--accent); color: var(--accent); }
   .list-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
   .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 6px 28px; padding: 18px 0; border-top: 1px solid var(--border); color: var(--fg); text-decoration: none; }
   .row:hover { color: var(--accent); }
