@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const labels: Record<string, string> = {
+    'ml-data-science': 'ML / MLOps + Data Science',
+    'software-engineering': 'Software Engineering',
+    'ai-implementations': 'AI Implementations',
+  };
+  return Object.entries(labels).map(([category, label]) => ({
+    params: { category },
+    props: { label },
+  }));
+}
+
+const { category } = Astro.params;
+const { label } = Astro.props;
+
+const projects = (await getCollection('projects'))
+  .filter((p) => p.data.category === category)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<Layout title={label}>
+  <h1>{label}</h1>
+  {projects.map((p) => (
+    <a class="card" href={`/projects/${p.id}`}>
+      <h3>
+        {p.data.title}
+        {p.data.status === 'placeholder' && <span class="badge">not written yet</span>}
+      </h3>
+      <p>{p.data.hook}</p>
+    </a>
+  ))}
+</Layout>
