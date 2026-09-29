@@ -6,6 +6,7 @@ summary: "Multi-agent engine that argues with itself before recommending, with d
 status: "published"
 order: 1
 featured: true
+keyTags: ["Python", "FastAPI", "FastMCP", "LiteLLM"]
 problem: "Most LLM \"advisor\" tools give a single confident answer with no visible reasoning trail or dissent — fine for demos, unreliable for real strategic decisions."
 whatItDoes: "A working multi-agent advisory system: submit a strategic question, get back multiple adversarial perspectives, a synthesized recommendation with explicit tradeoffs, and a full audit trail of how the answer was reached — reachable via web, Teams, Slack, or MCP, with budget/rate controls and Stripe billing wired in."
 howItsBuilt:

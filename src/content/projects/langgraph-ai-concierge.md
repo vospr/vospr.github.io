@@ -6,6 +6,7 @@ summary: "Multi-node concierge agent with deterministic and LLM-driven routing, 
 status: "published"
 order: 3
 featured: false
+keyTags: ["LangGraph", "Anthropic Claude", "Pydantic"]
 problem: "A travel/hospitality concierge bot needs to handle everything from simple FAQ to multi-step research and booking, without one giant prompt trying to do all of it at once."
 whatItDoes: "A working multi-node concierge agent that routes between deterministic and LLM-driven paths depending on the request, with test coverage and architecture documentation to back the design choices."
 howItsBuilt:

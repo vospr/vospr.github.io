@@ -6,6 +6,7 @@ summary: "Scaffolding that turns Claude Code into a structured multi-agent workf
 status: "published"
 order: 2
 featured: true
+keyTags: ["Claude Code", "Spec-driven", "GitHub Actions"]
 problem: "Claude Code (and agentic tools generally) are only as good as the context and workflow structure around them — most projects hand an agent a blank slate and get inconsistent results."
 whatItDoes: "A reusable scaffold that other projects can adopt directly to get consistent, reviewable AI-assisted delivery instead of ad-hoc prompting — plus a public writeup explaining why it works."
 howItsBuilt:

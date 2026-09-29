@@ -14,7 +14,7 @@ const areaSlugs: Record<string, string> = {
 };
 
 export async function getStaticPaths() {
-  const projects = await getCollection('projects');
+  const projects = await getCollection('projects', (p) => !p.data.draft);
   return projects.map((p) => ({
     params: { id: p.id },
     props: { project: p },

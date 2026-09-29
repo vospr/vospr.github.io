@@ -9,8 +9,10 @@ const projects = defineCollection({
     hook: z.string(),
     summary: z.string(),
     status: z.enum(['published', 'draft', 'placeholder']).default('draft'),
+    draft: z.boolean().default(false),
     order: z.number().default(0),
     featured: z.boolean().default(false),
+    keyTags: z.array(z.string()).optional(),
     problem: z.string(),
     whatItDoes: z.string(),
     howItsBuilt: z

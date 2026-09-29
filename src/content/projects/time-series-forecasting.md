@@ -6,6 +6,7 @@ summary: "Classical and deep-learning forecasting on public Swiss electricity-ma
 status: "published"
 order: 3
 featured: false
+keyTags: ["TensorFlow/Keras", "ARIMA", "Azure Databricks"]
 problem: "Economics research at Université de Neuchâtel needed both rigorous classical time-series methods and modern deep-learning forecasting, applied to real econometric questions, not toy datasets."
 whatItDoes: "Forecasting models and statistical analysis used directly in academic research output, spanning both classical (ARIMA/STATA) and deep-learning (TensorFlow/Keras) approaches."
 howItsBuilt:
@@ -31,6 +32,8 @@ stackGroups:
     items: ["TensorFlow/Keras", "ARIMA", "scikit-learn"]
   - label: "Stats"
     items: ["R", "STATA"]
+  - label: "Platform"
+    items: ["Azure Databricks", "Azure Machine Learning"]
 links:
   - label: "GitHub"
     url: "https://github.com/vospr/time-series-forecasting"

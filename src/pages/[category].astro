@@ -4,33 +4,43 @@ import ProjectRow from '../components/ProjectRow.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
-  const labels: Record<string, string> = {
-    'ai-solutions': 'AI Solutions',
-    'ml-data-science': 'ML / MLOps + Data Science',
-    'software-engineering': 'Software Engineering',
+  const meta: Record<string, { label: string; description: string }> = {
+    'ai-solutions': {
+      label: 'AI Solutions',
+      description: 'Agentic AI, RAG and multi-agent systems — from a personal multi-agent advisory engine to Claude Code workflow tooling.',
+    },
+    'ml-data-science': {
+      label: 'ML / MLOps + Data Science',
+      description: 'End-to-end MLOps pipelines, data platforms and forecasting — from seismic classification to candidate-matching and econometrics research.',
+    },
+    'software-engineering': {
+      label: 'Software Engineering',
+      description: 'Production delivery work — a multi-channel AI coaching platform rebuild and an MCP server serving multiple enterprise AI clients.',
+    },
   };
-  return Object.entries(labels).map(([category, label]) => ({
+  return Object.entries(meta).map(([category, m]) => ({
     params: { category },
-    props: { label },
+    props: m,
   }));
 }
 
 const { category } = Astro.params;
-const { label } = Astro.props;
+const { label, description } = Astro.props;
 
 const projects = (await getCollection('projects'))
-  .filter((p) => p.data.category === category)
+  .filter((p) => p.data.category === category && !p.data.draft)
   .sort((a, b) => a.data.order - b.data.order);
 ---
 
-<Layout title={label}>
+<Layout title={label} description={description}>
   <main class="wrap home">
     <section class="hero">
       <h1>{label}</h1>
+      <p class="lede">{description}</p>
     </section>
     <section>
       {projects.map((p) => (
-        <ProjectRow project={p} areaLabel={label} />
+        <ProjectRow project={p} showArea={false} />
       ))}
     </section>
   </main>

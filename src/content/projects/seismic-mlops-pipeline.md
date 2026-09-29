@@ -6,6 +6,7 @@ summary: "End-to-end MLOps: ingestion to serving, with registry, drift metrics a
 status: "published"
 order: 1
 featured: true
+keyTags: ["MLflow", "Optuna", "Feast", "Prometheus"]
 problem: "Seismic data classification demos usually stop at a trained model in a notebook — no serving, no monitoring, no idea when it starts drifting."
 whatItDoes: "A deployable classification service with a versioned model registry, a live metrics/drift-detection surface, and a repeatable retrain path — not a one-off experiment."
 howItsBuilt:

@@ -1,9 +1,13 @@
 ---
+import { SHOW_CV } from '../config';
+
 interface Props {
   title: string;
   description?: string;
 }
-const { title, description = 'Andrey Popov — AI Solutions Engineer' } = Astro.props;
+const { title, description = 'AI Solutions Engineer with twenty years in finance, building agentic AI, RAG and MLOps systems. Based in Neuchâtel, Switzerland.' } = Astro.props;
+const pageTitle = `${title} · Andrey Popov`;
+const pageUrl = new URL(Astro.url.pathname, Astro.site ?? 'https://vospr.github.io').toString();
 ---
 <!doctype html>
 <html lang="en">
@@ -11,7 +15,11 @@ const { title, description = 'Andrey Popov — AI Solutions Engineer' } = Astro.
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <title>{title} · Andrey Popov</title>
+    <title>{pageTitle}</title>
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:type" content="website" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -27,7 +35,7 @@ const { title, description = 'Andrey Popov — AI Solutions Engineer' } = Astro.
           <a href="/ai-solutions">AI</a>
           <a href="/ml-data-science">ML / MLOps</a>
           <a href="/software-engineering">Software</a>
-          <a class="cv" href="/cv.pdf">CV ↓</a>
+          {SHOW_CV && <a class="cv" href="/cv.pdf">CV ↓</a>}
         </nav>
       </div>
     </header>

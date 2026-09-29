@@ -6,6 +6,7 @@ summary: "Filtering, similarity and skill-ratio logic feeding a live candidate-t
 status: "published"
 order: 2
 featured: false
+keyTags: ["dbt", "BigQuery", "Kafka"]
 problem: "Matching candidates to open positions well means combining several imperfect signals (skills, availability, similarity) into a single reliable ranking — worked through ticket by ticket rather than \"build it once and done.\""
 whatItDoes: "Working matching pipelines feeding a live candidate-to-position ranking system, built and validated against real data infrastructure (BigQuery/PostgreSQL/Kafka)."
 howItsBuilt:

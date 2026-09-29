@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import ProjectRow from '../components/ProjectRow.astro';
 import { getCollection } from 'astro:content';
+import { SHOW_CV } from '../config';
 
 const areaLabels: Record<string, string> = {
   'ai-solutions': 'AI Solutions',
@@ -10,10 +11,8 @@ const areaLabels: Record<string, string> = {
 };
 
 const all = await getCollection('projects');
-const published = all.filter((p) => p.data.status !== 'placeholder');
-const featured = all
-  .filter((p) => p.data.featured)
-  .sort((a, b) => a.data.order - b.data.order);
+const live = all.filter((p) => !p.data.draft);
+const featured = live.filter((p) => p.data.featured).sort((a, b) => a.data.order - b.data.order);
 
 const areas = [
   { slug: 'ai-solutions', label: 'AI Solutions' },
@@ -22,7 +21,10 @@ const areas = [
 ];
 ---
 
-<Layout title="Home">
+<Layout
+  title="Home"
+  description="AI Solutions Engineer with twenty years in finance, building agentic AI, RAG and MLOps systems. Based in Neuchâtel, Switzerland."
+>
   <main class="wrap home">
     <section class="hero">
       <div class="avail meta">
@@ -35,7 +37,7 @@ const areas = [
         I can explain them to the CFO as well as the CTO.
       </p>
       <div class="btns">
-        <a class="btn primary" href="/cv.pdf">Download CV</a>
+        {SHOW_CV && <a class="btn primary" href="/cv.pdf">Download CV</a>}
         <a class="btn" href="mailto:cv.andrey.popov@gmail.com">Email</a>
         <a class="btn" href="https://www.linkedin.com/in/andrey-p-58ab10100">LinkedIn</a>
         <a class="btn" href="https://github.com/vospr">GitHub</a>
@@ -45,7 +47,7 @@ const areas = [
     <section>
       <div class="list-head">
         <h2 class="label">Selected work</h2>
-        <span class="meta">{published.length} projects</span>
+        <span class="meta">{live.length} projects</span>
       </div>
       {featured.map((p) => (
         <ProjectRow project={p} areaLabel={areaLabels[p.data.category]} />
@@ -56,7 +58,7 @@ const areas = [
       <h2 class="label">All work by area</h2>
       <div class="areas">
         {areas.map((a) => {
-          const count = published.filter((p) => p.data.category === a.slug).length;
+          const count = live.filter((p) => p.data.category === a.slug).length;
           return (
             <a class="area" href={`/${a.slug}`}>
               {a.label} <span class="meta">{count} →</span>

@@ -6,6 +6,7 @@ summary: "One MCP server serving Copilot, ChatGPT Enterprise and Claude Desktop,
 status: "published"
 order: 2
 featured: true
+keyTags: ["TypeScript", "MCP SDK", "OAuth 2.1"]
 problem: "Enterprise AI clients (Copilot, ChatGPT Enterprise, Claude Desktop, Teams) each want their own integration — an MCP server was the bet that one spec could serve all of them."
 whatItDoes: "A working MCP server with a clean TypeScript build, validated against the real protocol surface, plus a phased-rollout writeup covering the privacy/security tradeoffs for each client platform."
 howItsBuilt:
