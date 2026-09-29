@@ -1,6 +1,17 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getCollection, render } from 'astro:content';
+import { getCollection } from 'astro:content';
+
+const areaLabels: Record<string, string> = {
+  'ai-solutions': 'AI Solutions',
+  'ml-data-science': 'ML / MLOps + Data Science',
+  'software-engineering': 'Software Engineering',
+};
+const areaSlugs: Record<string, string> = {
+  'ai-solutions': '/ai-solutions',
+  'ml-data-science': '/ml-data-science',
+  'software-engineering': '/software-engineering',
+};
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -11,26 +22,69 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props;
-const { Content } = await render(project);
+const d = project.data;
 ---
 
-<Layout title={project.data.title} description={project.data.hook}>
-  <h1>{project.data.title}</h1>
-  <p class="hook">{project.data.hook}</p>
-
-  {project.data.stack.length > 0 && (
-    <div class="stack">
-      {project.data.stack.map((t: string) => <span>{t}</span>)}
+<Layout title={d.title} description={d.hook}>
+  <article class="wrap project">
+    <div class="intro">
+      <div class="meta">
+        <a href={areaSlugs[d.category]}>{areaLabels[d.category]}</a> / {d.title.split(' / ')[0]}
+      </div>
+      <h1>{d.title}</h1>
+      <p class="hook">{d.hook}</p>
     </div>
-  )}
 
-  <Content />
+    {d.facts.length > 0 && (
+      <div class="facts">
+        {d.facts.map((f: { k: string; v: string }) => (
+          <div>
+            <span class="k">{f.k}</span>
+            <span class="v">{f.v}</span>
+          </div>
+        ))}
+      </div>
+    )}
 
-  {project.data.links.length > 0 && (
-    <p class="links">
-      {project.data.links.map((l: { label: string; url: string }) => (
-        <a href={l.url} target="_blank" rel="noopener">{l.label} ↗</a>
-      ))}
-    </p>
-  )}
+    <div class="body">
+      <div class="main">
+        <section>
+          <h2 class="label">Problem</h2>
+          <p>{d.problem}</p>
+        </section>
+        <section>
+          <h2 class="label">What it does</h2>
+          <p>{d.whatItDoes}</p>
+        </section>
+        {d.howItsBuilt.length > 0 && (
+          <section>
+            <h2 class="label">How it's built</h2>
+            <ul>
+              {d.howItsBuilt.map((b: { lead: string; detail: string }) => (
+                <li><strong>{b.lead}:</strong> {b.detail}</li>
+              ))}
+            </ul>
+          </section>
+        )}
+      </div>
+      {(d.links.length > 0 || d.stackGroups.length > 0) && (
+        <aside class="aside">
+          {d.links.length > 0 && (
+            <div class="grp">
+              <span class="k">Links</span>
+              {d.links.map((l: { label: string; url: string }) => (
+                <a href={l.url} target="_blank" rel="noopener">{l.label} ↗</a>
+              ))}
+            </div>
+          )}
+          {d.stackGroups.map((g: { label: string; items: string[] }) => (
+            <div class="grp">
+              <span class="k">{g.label}</span>
+              <span class="items">{g.items.join(' · ')}</span>
+            </div>
+          ))}
+        </aside>
+      )}
+    </div>
+  </article>
 </Layout>

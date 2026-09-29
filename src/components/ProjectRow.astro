@@ -1,0 +1,14 @@
+---
+const { project, areaLabel } = Astro.props;
+const topStack = project.data.stackGroups.flatMap((g: { items: string[] }) => g.items).slice(0, 4);
+---
+<a class="row" href={`/projects/${project.id}`}>
+  <div>
+    <span class="t">{project.data.title}{project.data.status === 'placeholder' && ' (not written yet)'}</span>
+    <span class="meta">{areaLabel}</span>
+  </div>
+  <div>
+    <span class="sum">{project.data.summary}</span>
+    <span class="meta">{topStack.join(' · ')}</span>
+  </div>
+</a>

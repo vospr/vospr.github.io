@@ -1,38 +1,69 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ProjectRow from '../components/ProjectRow.astro';
 import { getCollection } from 'astro:content';
 
-const projects = await getCollection('projects');
-const published = projects.filter((p) => p.data.status !== 'placeholder');
+const areaLabels: Record<string, string> = {
+  'ai-solutions': 'AI Solutions',
+  'ml-data-science': 'ML / MLOps',
+  'software-engineering': 'Software Engineering',
+};
 
-const categories = [
+const all = await getCollection('projects');
+const published = all.filter((p) => p.data.status !== 'placeholder');
+const featured = all
+  .filter((p) => p.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const areas = [
   { slug: 'ai-solutions', label: 'AI Solutions' },
-  { slug: 'ml-data-science', label: 'ML / MLOps + Data Science' },
+  { slug: 'ml-data-science', label: 'ML / MLOps + DS' },
   { slug: 'software-engineering', label: 'Software Engineering' },
 ];
 ---
 
 <Layout title="Home">
-  <h1>Andrey Popov</h1>
-  <p class="hook">
-    Finance-born AI Solutions Engineer — twenty years closing IFRS books, then walked into a
-    room full of neural networks and didn't blink. Now building agentic AI, RAG, and MLOps
-    systems, based in Neuchâtel, Switzerland.
-  </p>
+  <main class="wrap home">
+    <section class="hero">
+      <div class="avail meta">
+        <span class="on"><span class="dot"></span>Open to AI engineering roles</span>
+        <span>Neuchâtel · Switzerland</span>
+      </div>
+      <h1>AI Solutions Engineer with twenty years in finance.</h1>
+      <p class="lede">
+        I closed IFRS books for two decades. Now I build agentic AI, RAG and MLOps systems, and
+        I can explain them to the CFO as well as the CTO.
+      </p>
+      <div class="btns">
+        <a class="btn primary" href="/cv.pdf">Download CV</a>
+        <a class="btn" href="mailto:cv.andrey.popov@gmail.com">Email</a>
+        <a class="btn" href="https://www.linkedin.com/in/andrey-p-58ab10100">LinkedIn</a>
+        <a class="btn" href="https://github.com/vospr">GitHub</a>
+      </div>
+    </section>
 
-  <h2>Explore by category</h2>
-  {categories.map((c) => {
-    const count = published.filter((p) => p.data.category === c.slug).length;
-    return (
-      <a class="card" href={`/${c.slug}`}>
-        <h3>{c.label} <span class="badge">{count} project{count === 1 ? '' : 's'}</span></h3>
-      </a>
-    );
-  })}
+    <section>
+      <div class="list-head">
+        <h2 class="label">Selected work</h2>
+        <span class="meta">{published.length} projects</span>
+      </div>
+      {featured.map((p) => (
+        <ProjectRow project={p} areaLabel={areaLabels[p.data.category]} />
+      ))}
+    </section>
 
-  <h2>Elsewhere</h2>
-  <p class="links">
-    <a href="https://www.linkedin.com/in/andrey-p-58ab10100">LinkedIn</a>
-    <a href="https://github.com/vospr">GitHub</a>
-  </p>
+    <section>
+      <h2 class="label">All work by area</h2>
+      <div class="areas">
+        {areas.map((a) => {
+          const count = published.filter((p) => p.data.category === a.slug).length;
+          return (
+            <a class="area" href={`/${a.slug}`}>
+              {a.label} <span class="meta">{count} →</span>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+  </main>
 </Layout>

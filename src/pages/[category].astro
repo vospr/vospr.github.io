@@ -1,12 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ProjectRow from '../components/ProjectRow.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
   const labels: Record<string, string> = {
+    'ai-solutions': 'AI Solutions',
     'ml-data-science': 'ML / MLOps + Data Science',
     'software-engineering': 'Software Engineering',
-    'ai-solutions': 'AI Solutions',
   };
   return Object.entries(labels).map(([category, label]) => ({
     params: { category },
@@ -23,14 +24,14 @@ const projects = (await getCollection('projects'))
 ---
 
 <Layout title={label}>
-  <h1>{label}</h1>
-  {projects.map((p) => (
-    <a class="card" href={`/projects/${p.id}`}>
-      <h3>
-        {p.data.title}
-        {p.data.status === 'placeholder' && <span class="badge">not written yet</span>}
-      </h3>
-      <p>{p.data.hook}</p>
-    </a>
-  ))}
+  <main class="wrap home">
+    <section class="hero">
+      <h1>{label}</h1>
+    </section>
+    <section>
+      {projects.map((p) => (
+        <ProjectRow project={p} areaLabel={label} />
+      ))}
+    </section>
+  </main>
 </Layout>
