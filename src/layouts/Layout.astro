@@ -69,7 +69,8 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site ?? 'https://vospr.github.
     }
   }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 var(--font-body); -webkit-font-smoothing: antialiased; }
+  html { background: var(--bg); }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 var(--font-body); -webkit-font-smoothing: antialiased; min-height: 100dvh; }
   a { color: var(--accent); }
   a:hover { color: var(--accent-hover); }
   .wrap { max-width: var(--container); margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); }

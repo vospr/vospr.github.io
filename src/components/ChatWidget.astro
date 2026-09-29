@@ -261,8 +261,10 @@ const WORKER_URL = 'https://andrey-portfolio-chat.vospr2.workers.dev/chat';
     display: flex;
     align-items: center;
     gap: 10px;
-    background: #0f1012;
-    color: #fff;
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--fg);
     border: 1px solid var(--border);
     border-radius: 6px;
     padding: 11px 16px 11px 14px;
@@ -284,7 +286,7 @@ const WORKER_URL = 'https://andrey-portfolio-chat.vospr2.workers.dev/chat';
     height: 7px;
     border-radius: 50%;
     background: #7b93ff;
-    border: 2px solid #0f1012;
+    border: 2px solid var(--bg);
   }
 
   .cw-panel {
