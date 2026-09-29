@@ -1,6 +1,6 @@
 ---
 title: "LangGraph AI Concierge"
-category: "ai-implementations"
+category: "ai-solutions"
 hook: "A concierge that knows when to just answer, when to look something up, and when to hand off — routing is the actual hard part, not the chat."
 status: "published"
 order: 3

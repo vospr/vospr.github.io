@@ -6,9 +6,9 @@ const projects = await getCollection('projects');
 const published = projects.filter((p) => p.data.status !== 'placeholder');
 
 const categories = [
+  { slug: 'ai-solutions', label: 'AI Solutions' },
   { slug: 'ml-data-science', label: 'ML / MLOps + Data Science' },
   { slug: 'software-engineering', label: 'Software Engineering' },
-  { slug: 'ai-implementations', label: 'AI Implementations' },
 ];
 ---
 

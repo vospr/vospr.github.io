@@ -6,7 +6,7 @@ export async function getStaticPaths() {
   const labels: Record<string, string> = {
     'ml-data-science': 'ML / MLOps + Data Science',
     'software-engineering': 'Software Engineering',
-    'ai-implementations': 'AI Implementations',
+    'ai-solutions': 'AI Solutions',
   };
   return Object.entries(labels).map(([category, label]) => ({
     params: { category },

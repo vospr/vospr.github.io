@@ -1,6 +1,6 @@
 ---
 title: "Shared AI-Agent Baseline Pattern"
-category: "ai-implementations"
+category: "ai-solutions"
 hook: "Placeholder — not yet written. Client-agnostic SDLC pattern, from memory only; no client references."
 status: "placeholder"
 order: 5

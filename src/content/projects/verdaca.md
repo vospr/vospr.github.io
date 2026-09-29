@@ -1,6 +1,6 @@
 ---
 title: "Verdaca / Praxis"
-category: "ai-implementations"
+category: "ai-solutions"
 hook: "A multi-agent reasoning engine built to argue with itself before it gives you an answer — explicit tradeoffs, red-team dissent, and scoped recommendations instead of confident-sounding guesses."
 status: "published"
 order: 1

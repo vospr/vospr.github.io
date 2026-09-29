@@ -1,6 +1,6 @@
 ---
 title: "Context Engineering Template"
-category: "ai-implementations"
+category: "ai-solutions"
 hook: "The thing nobody tells you before you hand a project to an AI agent: garbage context in, garbage code out. This is the scaffolding that fixes that."
 status: "published"
 order: 2

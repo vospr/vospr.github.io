@@ -1,6 +1,6 @@
 ---
 title: "AI Adoption Measurement Framework"
-category: "ai-implementations"
+category: "ai-solutions"
 hook: "Placeholder — not yet written. Generic, from-memory content only; no client references."
 status: "placeholder"
 order: 4
