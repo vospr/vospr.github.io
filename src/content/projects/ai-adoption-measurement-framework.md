@@ -4,7 +4,7 @@ category: "ai-solutions"
 hook: "Teams adopting AI coding agents can say they feel faster, but not what a delivered change costs or where the time goes. I built a method and a small toolkit that starts to answer both, per delivered change, and it runs monthly on an ongoing client engagement."
 summary: "A measurement method and Python collectors for AI-assisted delivery. They allocate AI spend to each delivered change and measure the wait between steps, and the method specifies how to record whether an agent, a human or automation ran each step. Running monthly since August 2026."
 status: "published"
-order: 2
+order: 3
 featured: true
 keyTags: ["AI delivery metrics", "Python", "Claude Code"]
 problem: "An internal AI-first programme set out to measure its adoption across a client account. The dashboard only showed whether AI touched a ticket (through labels that were mostly empty), measured throughput in story points, and had no cost data and nothing finer than monthly. Self-reported speed is not evidence: in a 2025 controlled study (METR), developers felt ~20% faster and were measured ~19% slower."
