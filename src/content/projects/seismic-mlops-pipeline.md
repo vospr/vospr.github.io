@@ -4,8 +4,9 @@ category: "ml-data-science"
 hook: "A full MLOps lifecycle built end to end — not a notebook that classifies seismic data once, but a pipeline that keeps working after deployment."
 summary: "End-to-end MLOps: ingestion to serving, with registry, drift metrics and retraining."
 status: "published"
+draft: true
 order: 1
-featured: true
+featured: false
 keyTags: ["MLflow", "Optuna", "Feast", "Prometheus"]
 problem: "Seismic data classification demos usually stop at a trained model in a notebook — no serving, no monitoring, no idea when it starts drifting."
 whatItDoes: "A deployable classification service with a versioned model registry, a live metrics/drift-detection surface, and a repeatable retrain path — not a one-off experiment."

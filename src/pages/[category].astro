@@ -7,15 +7,15 @@ export async function getStaticPaths() {
   const meta: Record<string, { label: string; description: string }> = {
     'ai-solutions': {
       label: 'AI Solutions',
-      description: 'Agentic AI, RAG and multi-agent systems — from a personal multi-agent advisory engine to Claude Code workflow tooling.',
+      description: 'Agentic AI workflows, MCP and multi-agent systems — from a governed AI workflow prototype and an MCP decision memo to AI-delivery cost measurement and Claude Code workflow tooling.',
     },
     'ml-data-science': {
-      label: 'ML / MLOps + Data Science',
-      description: 'End-to-end MLOps pipelines, data platforms and forecasting — from seismic classification to candidate-matching and econometrics research.',
+      label: 'ML + Data Science',
+      description: 'End-to-end ML pipelines, data platforms and forecasting — from a production candidate-matching pipeline to econometric forecasting research.',
     },
     'software-engineering': {
       label: 'Software Engineering',
-      description: 'Production delivery work — a multi-channel AI coaching platform rebuild and an MCP server serving multiple enterprise AI clients.',
+      description: 'Team delivery work: release hardening and a human-coaching integration on an AI coaching platform rebuild.',
     },
   };
   return Object.entries(meta).map(([category, m]) => ({

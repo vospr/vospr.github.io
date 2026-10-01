@@ -1,38 +1,38 @@
 ---
-title: "AI MCP Server"
-category: "software-engineering"
-hook: "A proof-of-concept answering a concrete question: can one MCP server expose the same AI coaching capability to Copilot, ChatGPT Enterprise, and Claude Desktop at once, without three separate integrations?"
-summary: "One MCP server serving Copilot, ChatGPT Enterprise and Claude Desktop, validated on the real protocol."
+title: "MCP Server Spike & Decision Memo"
+category: "ai-solutions"
+hook: "One day to answer a real product question: should an AI coaching engine reach employees inside Copilot, ChatGPT Enterprise and Claude through a single MCP server, and what can safely be exposed before identity and GDPR work is done?"
+summary: "A one-day MCP spike and decision memo: what to expose, what to defer, and why. The hiring challenge that put me on the rebuild team."
 status: "published"
 order: 2
-featured: true
-keyTags: ["TypeScript", "MCP SDK", "OAuth 2.1"]
-problem: "Enterprise AI clients (Copilot, ChatGPT Enterprise, Claude Desktop, Teams) each want their own integration — an MCP server was the bet that one spec could serve all of them."
-whatItDoes: "A working MCP server with a clean TypeScript build, validated against the real protocol surface, plus a phased-rollout writeup covering the privacy/security tradeoffs for each client platform."
+featured: false
+keyTags: ["MCP", "TypeScript", "Architecture decision"]
+problem: "A coaching product wanted to meet users inside the enterprise AI tools they already use. One integration per platform doesn't scale, and coaching conversations are sensitive data that third-party AI clients should not see."
+whatItDoes: "A decision memo backed by a working MCP server. The memo recommends a phased rollout: expose single-turn advice, session booking and coaching reference data now; defer multi-turn coaching until identity and a GDPR impact assessment are in place. The spike proves the MCP surface against a stub backend."
 howItsBuilt:
-  - lead: "Tools and resources"
-    detail: "single-turn coaching advice and session booking as tools; resources and prompts for coaching-methodology data."
-  - lead: "Full protocol verification"
-    detail: "initialize, tools/list, tools/call, resources/read, prompts/list — over both stdio and Streamable HTTP transports."
-  - lead: "Rollout tradeoffs documented"
-    detail: "privacy, GDPR, auth, and prompt-injection tradeoffs across the four target clients."
+  - lead: "The scope line"
+    detail: "stateless single-turn calls instead of a server-held coaching loop, so no conversation state reaches third-party AI clients and it runs on serverless. The July 2026 MCP spec later made stateless the protocol default."
+  - lead: "Coaching concepts mapped to MCP primitives"
+    detail: "reference data as resources, actions as tools, the guided flow as a prompt; user-specific data deliberately deferred."
+  - lead: "Verified at protocol level"
+    detail: "handshake, tool calls, resource reads and prompts exercised by hand over Streamable HTTP and stdio. Copilot and ChatGPT support assessed from vendor docs, not tested."
+  - lead: "Built with a multi-agent AI workflow"
+    detail: "structured AI review rounds shaped the approach and the memo; the code was generated from that plan and reviewed."
 facts:
   - k: "Type"
-    v: "MCP server"
-  - k: "Channels"
-    v: "Copilot · ChatGPT Enterprise · Claude · Teams"
+    v: "Decision memo + MCP spike"
+  - k: "Timebox"
+    v: "1 day (hiring challenge)"
+  - k: "Clients"
+    v: "Protocol-tested by hand (HTTP + stdio) · Assessed: Claude Desktop, Copilot, ChatGPT Enterprise, Teams"
   - k: "Evidence"
-    v: "Full protocol surface verified"
+    v: "Memo led to the engagement · protocol checked by hand · no automated tests"
   - k: "Code"
-    v: "GitHub ↗"
+    v: "Available on request"
 stackGroups:
   - label: "Core"
-    items: ["TypeScript", "MCP SDK"]
-  - label: "Infra"
-    items: ["Azure Functions", "PostgreSQL", "OAuth 2.1"]
+    items: ["TypeScript", "MCP TypeScript SDK", "Zod"]
   - label: "Transports"
-    items: ["Streamable HTTP", "stdio"]
-links:
-  - label: "GitHub"
-    url: "https://github.com/vospr/mcp-server"
+    items: ["Streamable HTTP (stateless)", "stdio"]
+links: []
 ---

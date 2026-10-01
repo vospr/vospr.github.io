@@ -1,35 +1,37 @@
 ---
 title: "LangGraph AI Concierge"
 category: "ai-solutions"
-hook: "A concierge that knows when to just answer, when to look something up, and when to hand off — routing is the actual hard part, not the chat."
-summary: "Multi-node concierge agent with deterministic and LLM-driven routing, backed by 54 tests and ADRs."
+hook: "A travel-concierge prototype built around one idea: answer with cheap keyword rules when you can, and pay for an LLM call only when the rules aren't sure."
+summary: "LangGraph prototype of rules-then-LLM routing for a travel concierge, built spec-first with AI coding agents in two weeks."
 status: "published"
 order: 3
 featured: false
-keyTags: ["LangGraph", "Anthropic Claude", "Pydantic"]
-problem: "A travel/hospitality concierge bot needs to handle everything from simple FAQ to multi-step research and booking, without one giant prompt trying to do all of it at once."
-whatItDoes: "A working multi-node concierge agent that routes between deterministic and LLM-driven paths depending on the request, with test coverage and architecture documentation to back the design choices."
+keyTags: ["LangGraph", "Anthropic Claude", "LLM routing"]
+problem: "A travel/hospitality assistant has to tell property questions, destination research and booking requests apart, without sending every message through one large prompt."
+whatItDoes: "A command-line prototype. Keyword rules route clear requests at no LLM cost; unclear ones get a single Claude classification call with a confidence floor. Routes lead to keyword lookup over a small mock destination file, a live web search, or a booking stub. A guardrail step turns off-topic or unclear requests into a clarifying question or a human hand-off, and answers are assembled from templates with source tags. Tested offline with mocked model and search calls; routing accuracy hasn't been measured yet."
 howItsBuilt:
-  - lead: "StateGraph routing"
-    detail: "deterministic and LLM-based routing across RAG, research, booking-stub, guardrail, synthesis, and follow-up nodes."
-  - lead: "Bounded, auditable runs"
-    detail: "file-based memory, structured trace allowlists/denylists, and token-budget management."
-  - lead: "Engineering rigor"
-    detail: "46 unit tests, 8 e2e tests, strict lint/type tooling (Ruff, mypy), ADR-backed architecture decisions."
+  - lead: "Two-stage routing"
+    detail: "keyword rules in YAML decide clear cases; one Claude call classifies the rest; low confidence falls back to a clarifying question."
+  - lead: "Failure paths first"
+    detail: "no API key, search outage, missing profile and node errors each degrade to a labelled answer or a human hand-off; trace output refuses sensitive fields by construction."
+  - lead: "Spec-first, AI-built"
+    detail: "spec and 40 story files before code; ~2,700 lines of Python and ~470 passing offline tests with mocked model and search calls."
+  - lead: "My role"
+    detail: "my idea, spec and architecture; code written by AI coding agents (BMAD workflow, Claude) under my review, Feb–Mar 2026."
 facts:
   - k: "Type"
-    v: "Multi-agent concierge"
+    v: "Routing prototype (command-line)"
   - k: "Scope"
-    v: "Travel / hospitality"
+    v: "Travel / hospitality (mock data)"
   - k: "Evidence"
-    v: "46 unit + 8 e2e tests"
+    v: "Offline tests · no routing eval yet"
   - k: "Code"
     v: "GitHub ↗"
 stackGroups:
   - label: "Core"
-    items: ["Python", "Anthropic Claude", "LangGraph", "StateGraph", "Pydantic"]
+    items: ["Python", "Anthropic Claude", "LangGraph", "DuckDuckGo Search"]
   - label: "Tooling"
-    items: ["Ruff", "mypy", "pytest", "YAML"]
+    items: ["pytest", "uv", "YAML"]
 links:
   - label: "GitHub"
     url: "https://github.com/vospr/LangGraph-AI-Concierge"

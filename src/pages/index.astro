@@ -6,7 +6,7 @@ import { SHOW_CV } from '../config';
 
 const areaLabels: Record<string, string> = {
   'ai-solutions': 'AI Solutions',
-  'ml-data-science': 'ML / MLOps',
+  'ml-data-science': 'ML + Data Science',
   'software-engineering': 'Software Engineering',
 };
 
@@ -16,14 +16,14 @@ const featured = live.filter((p) => p.data.featured).sort((a, b) => a.data.order
 
 const areas = [
   { slug: 'ai-solutions', label: 'AI Solutions' },
-  { slug: 'ml-data-science', label: 'ML / MLOps + DS' },
+  { slug: 'ml-data-science', label: 'ML + Data Science' },
   { slug: 'software-engineering', label: 'Software Engineering' },
 ];
 ---
 
 <Layout
   title="Home"
-  description="AI Solutions Engineer with twenty years in finance, building agentic AI, RAG and MLOps systems. Based in Neuchâtel, Switzerland."
+  description="AI Solutions Engineer with twenty years in finance: agentic workflows, MCP, data and ML pipelines. Based in Neuchâtel, Switzerland."
 >
   <main class="wrap home">
     <section class="hero">
@@ -32,8 +32,8 @@ const areas = [
       </div>
       <h1>AI Solutions Engineer with twenty years in finance.</h1>
       <p class="lede">
-        I closed IFRS books for two decades. Now I build agentic AI, RAG and MLOps systems, and
-        I can explain them to the CFO as well as the CTO.
+        I closed IFRS books for two decades. Now I design and build agentic AI workflows and
+        data/ML pipelines, and I can explain them to the CFO as well as the CTO.
       </p>
       <div class="btns">
         {SHOW_CV && <a class="btn primary" href="/cv.pdf">Download CV</a>}

@@ -1,35 +1,37 @@
 ---
 title: "Context Engineering"
 category: "ai-solutions"
-hook: "The thing nobody tells you before you hand a project to an AI agent: garbage context in, garbage code out. This is the scaffolding that fixes that."
-summary: "Scaffolding that turns Claude Code into a structured multi-agent workflow. Published article."
+hook: "Garbage context in, garbage code out. A Claude Code scaffold that gives agents durable memory, separated roles and hard stop conditions — built and measured in early 2026."
+summary: "Claude Code multi-agent scaffold (Feb–Apr 2026): stateless dispatcher, 7 role agents, blind review, file-based memory. Presented at an internal engineering workshop (~40 engineers)."
 status: "published"
 order: 2
-featured: true
-keyTags: ["Claude Code", "Spec-driven", "GitHub Actions"]
-problem: "Claude Code (and agentic tools generally) are only as good as the context and workflow structure around them — most projects hand an agent a blank slate and get inconsistent results."
-whatItDoes: "A reusable scaffold that other projects can adopt directly to get consistent, reviewable AI-assisted delivery instead of ad-hoc prompting — plus a public writeup explaining why it works."
+featured: false
+keyTags: ["Claude Code", "Multi-agent", "Spec-driven"]
+problem: "Agentic coding tools are only as good as the context and structure around them — hand an agent a blank slate and results drift across sessions."
+whatItDoes: "A reusable Claude Code setup. A stateless dispatcher routes work to planner, architect, implementer, reviewer, blind-reviewer and tester agents; decisions and failure patterns persist in files so work survives session resets; circuit breakers stop review loops and plan explosions. Measured against a bare baseline on one task: structure bought traceability and review discipline, at roughly 10× the tokens — which is why sizing matters. The bundled hooks are illustrative: they are not enforced yet and block nothing until fixed."
 howItsBuilt:
-  - lead: "Project-agnostic template"
-    detail: "turns Claude Code into a context-engineered multi-agent system."
-  - lead: "Structured cycle"
-    detail: "covering planning, decisions, documentation, implementation, and testing."
-  - lead: "Public writeup"
-    detail: "published a supporting article explaining the foundation needed before trusting agentic AI with real project work."
+  - lead: "Dispatcher + sized pipeline"
+    detail: "CLAUDE.md routes tasks to least-privilege subagents; Micro→Large sizing picks model tier and pipeline depth."
+  - lead: "Adversarial review"
+    detail: "A blind reviewer sees only the diff; a conflict table resolves disagreements; max 3 review cycles before escalation."
+  - lead: "File-based memory"
+    detail: "Decisions, pipeline state and failure patterns live in files and are injected into later dispatches."
+  - lead: "Lineage"
+    detail: "Synthesised from Anthropic, Fowler and OpenAI writing on context and harness engineering; April hardening adapted from Atelier Pipeline."
 facts:
   - k: "Type"
-    v: "Dev workflow template"
-  - k: "Scope"
-    v: "Project-agnostic"
+    v: "Claude Code workflow template"
+  - k: "Built"
+    v: "Feb–Apr 2026"
   - k: "Evidence"
-    v: "Template + published article"
+    v: "Internal workshop (~40) · article · one-task benchmark"
   - k: "Code"
     v: "GitHub ↗"
 stackGroups:
   - label: "Tooling"
-    items: ["Claude Code", "GitHub Actions"]
+    items: ["Claude Code (subagents, skills, hooks)", "Bash"]
   - label: "Practice"
-    items: ["Context engineering", "Spec-driven development"]
+    items: ["Context engineering", "Spec-driven development", "Adversarial review"]
 links:
   - label: "GitHub"
     url: "https://github.com/vospr/context-engineering-template"

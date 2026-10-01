@@ -6,7 +6,7 @@ interface Props {
   title: string;
   description?: string;
 }
-const { title, description = 'AI Solutions Engineer with twenty years in finance, building agentic AI, RAG and MLOps systems. Based in Neuchâtel, Switzerland.' } = Astro.props;
+const { title, description = 'AI Solutions Engineer with twenty years in finance: agentic workflows, MCP, data and ML pipelines. Based in Neuchâtel, Switzerland.' } = Astro.props;
 const pageTitle = `${title} · Andrey Popov`;
 const pageUrl = new URL(Astro.url.pathname, Astro.site ?? 'https://vospr.github.io').toString();
 ---
@@ -34,7 +34,7 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site ?? 'https://vospr.github.
         <a class="brand" href="/">Andrey Popov</a>
         <nav class="nav">
           <a href="/ai-solutions">AI</a>
-          <a href="/ml-data-science">ML / MLOps</a>
+          <a href="/ml-data-science">ML + Data Science</a>
           <a href="/software-engineering">Software</a>
           {SHOW_CV && <a class="cv" href="/cv.pdf">CV ↓</a>}
         </nav>
