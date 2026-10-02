@@ -6,7 +6,7 @@ interface Props {
   title: string;
   description?: string;
 }
-const { title, description = 'AI Solutions Engineer with twenty years in finance: agentic workflows, MCP, data and ML pipelines. Based in Neuchâtel, Switzerland.' } = Astro.props;
+const { title, description = 'AI Solutions Engineer with a background in finance: agentic workflows, MCP, data and ML pipelines. Based in Neuchâtel, Switzerland.' } = Astro.props;
 const pageTitle = `${title} · Andrey Popov`;
 const pageUrl = new URL(Astro.url.pathname, Astro.site ?? 'https://vospr.github.io').toString();
 ---

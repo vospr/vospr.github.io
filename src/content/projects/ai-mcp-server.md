@@ -28,11 +28,13 @@ facts:
   - k: "Evidence"
     v: "Memo led to the engagement · protocol checked by hand · no automated tests"
   - k: "Code"
-    v: "Available on request"
+    v: "GitHub ↗ (anonymized; placeholder domain data)"
 stackGroups:
   - label: "Core"
     items: ["TypeScript", "MCP TypeScript SDK", "Zod"]
   - label: "Transports"
     items: ["Streamable HTTP (stateless)", "stdio"]
-links: []
+links:
+  - label: "GitHub"
+    url: "https://github.com/vospr/coaching-mcp-spike"
 ---
