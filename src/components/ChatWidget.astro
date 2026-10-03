@@ -6,14 +6,7 @@ const WORKER_URL = 'https://andrey-portfolio-chat.vospr2.workers.dev/chat';
 <div id="chat-root">
   <button id="chat-launcher" class="cw-launcher" aria-label="Ask about my work">
     <span class="cw-launcher-icon">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <rect x="4" y="8" width="16" height="11" rx="3"></rect>
-        <path d="M12 8V4"></path>
-        <circle cx="12" cy="3" r="1.1" fill="currentColor" stroke="none"></circle>
-        <circle cx="8.5" cy="13.5" r="1.3" fill="currentColor" stroke="none"></circle>
-        <circle cx="15.5" cy="13.5" r="1.3" fill="currentColor" stroke="none"></circle>
-        <path d="M2 12.5h2M20 12.5h2"></path>
-      </svg>
+      <img src="/chat-verdict-dial.svg" width="64" height="64" alt="" aria-hidden="true" />
       <span class="cw-launcher-dot"></span>
     </span>
     Ask about my work
@@ -267,7 +260,7 @@ const WORKER_URL = 'https://andrey-portfolio-chat.vospr2.workers.dev/chat';
     color: var(--fg);
     border: 1px solid var(--border);
     border-radius: 6px;
-    padding: 11px 16px 11px 14px;
+    padding: 6px 16px 6px 6px;
     font: 600 17px var(--font-body);
     cursor: pointer;
     transition: color 120ms ease;
@@ -278,6 +271,9 @@ const WORKER_URL = 'https://andrey-portfolio-chat.vospr2.workers.dev/chat';
     display: inline-flex;
     flex: none;
   }
+  .cw-launcher-icon img {
+    display: block;
+  }
   .cw-launcher-dot {
     position: absolute;
     bottom: -2px;
@@ -285,8 +281,8 @@ const WORKER_URL = 'https://andrey-portfolio-chat.vospr2.workers.dev/chat';
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #7b93ff;
-    border: 2px solid var(--bg);
+    background: #FFFFFF;
+    border: 2px solid #000000;
   }
 
   .cw-panel {
