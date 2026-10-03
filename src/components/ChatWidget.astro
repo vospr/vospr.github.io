@@ -6,7 +6,10 @@ const WORKER_URL = 'https://andrey-portfolio-chat.vospr2.workers.dev/chat';
 <div id="chat-root">
   <button id="chat-launcher" class="cw-launcher" aria-label="Ask about my work">
     <span class="cw-launcher-icon">
-      <img src="/chat-verdict-dial.svg" width="64" height="64" alt="" aria-hidden="true" />
+      <picture>
+        <source media="(max-width: 480px)" srcset="/chat-verdict-dial-mobile.svg" />
+        <img src="/chat-verdict-dial.svg" width="64" height="64" alt="" aria-hidden="true" />
+      </picture>
       <span class="cw-launcher-dot"></span>
     </span>
     Ask about my work
@@ -35,7 +38,10 @@ const WORKER_URL = 'https://andrey-portfolio-chat.vospr2.workers.dev/chat';
         rows="1"
       ></textarea>
       <button type="submit" id="chat-send" class="cw-send" aria-label="Send message" disabled>
-        <img src="/chat-send.svg" width="32" height="32" alt="" aria-hidden="true" />
+        <picture>
+          <source media="(max-width: 480px)" srcset="/chat-send-mobile.svg" />
+          <img src="/chat-send.svg" width="32" height="32" alt="" aria-hidden="true" />
+        </picture>
       </button>
     </form>
   </div>
@@ -505,6 +511,7 @@ const WORKER_URL = 'https://andrey-portfolio-chat.vospr2.workers.dev/chat';
   }
 
   @media (max-width: 480px) {
+    .cw-launcher-dot { background: #000000; border-color: #FFFFFF; }
     .cw-panel {
       inset: 0;
       width: 100%;
@@ -515,7 +522,15 @@ const WORKER_URL = 'https://andrey-portfolio-chat.vospr2.workers.dev/chat';
     .cw-close { width: 44px; height: 44px; font-size: 18px; }
     .cw-msg-user, .cw-msg-assistant { font-size: 15px; }
     .cw-input { font-size: 16px; min-height: 48px; }
-    .cw-send { height: 48px; width: 48px; padding: 8px; }
+    .cw-send {
+      height: 48px;
+      width: 48px;
+      padding: 7px;
+      border: 1px solid #1F2226;
+      background: #FFFFFF;
+    }
+    .cw-send:hover:not(:disabled) { background: #f2f2f2; }
+    .cw-send:disabled { opacity: 1; }
     .cw-form { padding: 10px 12px calc(16px + env(safe-area-inset-bottom)); }
   }
 
