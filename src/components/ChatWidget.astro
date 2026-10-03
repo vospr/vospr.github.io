@@ -34,7 +34,9 @@ const WORKER_URL = 'https://andrey-portfolio-chat.vospr2.workers.dev/chat';
         autocomplete="off"
         rows="1"
       ></textarea>
-      <button type="submit" id="chat-send" class="cw-send" disabled>Send</button>
+      <button type="submit" id="chat-send" class="cw-send" aria-label="Send message" disabled>
+        <img src="/chat-send.svg" width="32" height="32" alt="" aria-hidden="true" />
+      </button>
     </form>
   </div>
 </div>
@@ -472,31 +474,30 @@ const WORKER_URL = 'https://andrey-portfolio-chat.vospr2.workers.dev/chat';
   }
   .cw-send {
     height: 44px;
-    padding: 0 18px;
+    width: 44px;
+    flex: none;
+    padding: 6px;
     border: none;
     border-radius: 8px;
-    background: var(--accent);
-    color: #fff;
-    font: 600 14px var(--font-body);
+    background: #1F2226;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    box-shadow: 0 2px 8px color-mix(in srgb, var(--accent) 35%, transparent);
+    justify-content: center;
+    box-shadow: 0 2px 8px #0003;
     transition: background 120ms ease, transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
   }
-  .cw-send::after {
-    content: '→';
-    font-size: 15px;
+  .cw-send img {
+    display: block;
+    transform: rotate(-90deg);
   }
   .cw-send:hover:not(:disabled) {
-    background: var(--accent-hover);
+    background: #34383d;
     transform: translateY(-1px);
-    box-shadow: 0 4px 14px color-mix(in srgb, var(--accent) 45%, transparent);
+    box-shadow: 0 4px 14px #0005;
   }
   .cw-send:active:not(:disabled) { transform: translateY(0); }
   .cw-send:disabled {
-    color: #fff;
     opacity: 0.35;
     cursor: default;
     box-shadow: none;
@@ -514,7 +515,7 @@ const WORKER_URL = 'https://andrey-portfolio-chat.vospr2.workers.dev/chat';
     .cw-close { width: 44px; height: 44px; font-size: 18px; }
     .cw-msg-user, .cw-msg-assistant { font-size: 15px; }
     .cw-input { font-size: 16px; min-height: 48px; }
-    .cw-send { height: 48px; }
+    .cw-send { height: 48px; width: 48px; padding: 8px; }
     .cw-form { padding: 10px 12px calc(16px + env(safe-area-inset-bottom)); }
   }
 
