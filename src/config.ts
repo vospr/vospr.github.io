@@ -1,2 +1,2 @@
-// Flip to true once public/cv.pdf exists.
-export const SHOW_CV = false;
+// public/cv.pdf is rendered by scripts/update-cv.sh.
+export const SHOW_CV = true;
