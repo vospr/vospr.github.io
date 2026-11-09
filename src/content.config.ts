@@ -47,6 +47,15 @@ const projects = defineCollection({
         })
       )
       .default([]),
+    caseStudy: z.object({
+      asOf: z.string(),
+      evidence: z.array(z.object({ label: z.string(), detail: z.string() })),
+      workflow: z.array(z.object({ label: z.string(), detail: z.string() })),
+      workflowNote: z.string(),
+      examples: z.array(z.object({ label: z.string(), detail: z.string() })),
+      exampleNote: z.string(),
+      excerpt: z.object({ question: z.string(), answer: z.string(), check: z.string(), qualification: z.string() }),
+    }).optional(),
   }),
 });
 
